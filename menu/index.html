@@ -107,6 +107,12 @@ section h2::after { content: ""; flex: 1; height: 1px; background: var(--linea);
 .variante { font-style: italic; font-weight: 400; color: var(--tinta-suave); }
 .puntos { flex: 1; border-bottom: 1px dotted var(--tinta-suave); opacity: 0.45; transform: translateY(-5px); min-width: 16px; }
 .precio { font-family: var(--texto); font-weight: 500; font-size: 15.5px; white-space: nowrap; font-variant-numeric: tabular-nums; color: var(--tinta); }
+.precios { display: flex; flex-direction: column; align-items: flex-end; gap: 1px; flex-shrink: 0; text-align: right; }
+.precios .lbl { font-family: var(--texto); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--tinta-suave); margin-right: 6px; font-weight: 400; }
+.precios .contado { font-family: var(--texto); font-weight: 500; font-size: 14.5px; white-space: nowrap; font-variant-numeric: tabular-nums; color: var(--terracota); }
+.precios .contado .lbl { color: var(--terracota); opacity: 0.85; }
+.formas { text-align: center; font-size: 12.5px; color: var(--tinta-suave); margin: -18px 0 0; }
+.formas strong { color: var(--terracota); font-weight: 500; }
 .detalle { font-size: 13px; color: var(--tinta-suave); display: flex; flex-wrap: wrap; gap: 2px 12px; }
 .detalle .nota { color: var(--terracota); }
 
@@ -127,12 +133,13 @@ footer .firma { font-family: var(--display); font-style: italic; font-size: 19px
   </header>
 
   <nav class="indice" id="indice" aria-label="Categorías"></nav>
+  <p class="formas">Precio con tarjeta · <strong>10% off en efectivo o transferencia</strong></p>
 
   <div id="carta" style="display:flex;flex-direction:column;gap:36px"></div>
 
   <footer>
     <p class="firma">Todo lo que ves en el espacio está a la venta.</p>
-    <p>Precios en pesos argentinos, sujetos a cambio. Consultanos en el stand por otros colores, medidas y plazos de entrega.</p>
+    <p>Precios en pesos argentinos, sujetos a cambio. 10% de descuento pagando en efectivo o transferencia. Consultanos en el stand por otros colores, medidas y plazos de entrega.</p>
   </footer>
 </main>
 
@@ -147,6 +154,22 @@ function partir(nombre) {
   // "Lámpara Glimmering · malbec" -> familia + variante; se quitan los tramos que repiten medidas ("Ø 60 cm", "120 × 40 cm").
   const partes = nombre.split(" · ").filter(p => !/\bcm\b|\bml\b|^\d+([.,]\d+)?\s*×\s*\d+/.test(p));
   return { familia: partes[0] || nombre, variante: partes.slice(1).join(" · ") };
+}
+
+const DESC_CONTADO = 0.10; // 10% de descuento en efectivo o transferencia
+const pesos = n => "$" + Math.round(n).toLocaleString("es-AR");
+function precioBloque(texto) {
+  const desde = /^desde\s/i.test(texto) ? "desde " : "";
+  const n = Number(String(texto).replace(/\D/g, "")) || 0;
+  const box = document.createElement("span"); box.className = "precios";
+  const t = document.createElement("span"); t.className = "precio";
+  const lt = document.createElement("span"); lt.className = "lbl"; lt.textContent = "Tarjeta";
+  t.append(lt, document.createTextNode(desde + pesos(n)));
+  const c = document.createElement("span"); c.className = "contado";
+  const lc = document.createElement("span"); lc.className = "lbl"; lc.textContent = "Efvo. / transf.";
+  c.append(lc, document.createTextNode(desde + pesos(n * (1 - DESC_CONTADO))));
+  box.append(t, c);
+  return box;
 }
 
 function el(tag, cls, txt) { const e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; }
@@ -206,7 +229,7 @@ cats.forEach(cat => {
     const fila = el("div", "fila");
     const n = el("span", "nombre", familia);
     if (variante) { n.appendChild(document.createTextNode(" ")); n.appendChild(el("span", "variante", variante)); }
-    fila.append(n, el("span", "puntos"), el("span", "precio", it.precio));
+    fila.append(n, el("span", "puntos"), precioBloque(it.precio));
     item.appendChild(fila);
     if (it.mix) {
       const d = el("div", "detalle");
