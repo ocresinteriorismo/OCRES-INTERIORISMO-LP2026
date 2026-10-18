@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<style>:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<title>Ocres en Estilo Pilar</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500&display=swap">
+<style>
+/* Layout: una carta de precios angosta, como un menú impreso; familia en serif, variante en itálica, precio alineado a la derecha con línea de puntos. */
+:root {
+  --lino: #F2ECE2;
+  --papel: #FBF8F3;
+  --tinta: #3A2A20;        /* marrón oscuro */
+  --tinta-suave: #7A6656;
+  --ocre: #B8862F;          /* ocre dorado */
+  --terracota: #A85A3C;
+  --salvia: #8C9A7E;
+  --linea: #D9CDBB;
+  --display: "Cormorant Garamond", "Cormorant", Garamond, "Times New Roman", serif;
+  --texto: "Jost", "Futura", "Century Gothic", "Avenir", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --lino: #1F1914; --papel: #26201A; --tinta: #F1E8DA; --tinta-suave: #B8A792;
+    --ocre: #D6A856; --terracota: #D98A69; --salvia: #A9B79B; --linea: #4A3D31;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --lino: #1F1914; --papel: #26201A; --tinta: #F1E8DA; --tinta-suave: #B8A792;
+  --ocre: #D6A856; --terracota: #D98A69; --salvia: #A9B79B; --linea: #4A3D31;
+  color-scheme: dark;
+}
+body {
+  background: var(--lino);
+  color: var(--tinta);
+  font-family: var(--texto);
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+.carta {
+  max-width: 560px;
+  margin: 0 auto;
+  padding-block: 40px 56px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+header { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.marca {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: clamp(44px, 13vw, 64px);
+  letter-spacing: 0.04em;
+  line-height: 0.95;
+  margin: 0;
+}
+.sub {
+  font-size: 11px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--tinta-suave);
+  margin: 0;
+}
+.evento {
+  margin-top: 14px;
+  padding: 12px 18px;
+  border-top: 1px solid var(--linea);
+  border-bottom: 1px solid var(--linea);
+  display: flex; flex-direction: column; gap: 2px;
+}
+.evento strong { font-family: var(--display); font-style: italic; font-weight: 400; font-size: 22px; color: var(--terracota); }
+.evento span { font-size: 12.5px; color: var(--tinta-suave); letter-spacing: 0.02em; }
+
+nav.indice { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px 18px; }
+nav.indice a {
+  font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--tinta); text-decoration: none; padding: 6px 2px;
+  border-bottom: 1px solid transparent;
+}
+nav.indice a:hover, nav.indice a:focus-visible { border-bottom-color: var(--ocre); outline: none; }
+
+section { display: flex; flex-direction: column; gap: 4px; scroll-margin-top: 20px; }
+section h2 {
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 32px;
+  margin: 0 0 6px;
+  display: flex; align-items: center; gap: 14px;
+  text-wrap: balance;
+}
+section h2::after { content: ""; flex: 1; height: 1px; background: var(--linea); }
+.item { padding: 12px 0; border-bottom: 1px dotted var(--linea); display: flex; flex-direction: column; gap: 3px; }
+.item:last-child { border-bottom: 0; }
+.fila { display: flex; align-items: baseline; gap: 10px; }
+.nombre { font-family: var(--display); font-size: 21px; font-weight: 600; line-height: 1.15; min-width: 0; }
+.variante { font-style: italic; font-weight: 400; color: var(--tinta-suave); }
+.puntos { flex: 1; border-bottom: 1px dotted var(--tinta-suave); opacity: 0.45; transform: translateY(-5px); min-width: 16px; }
+.precio { font-family: var(--texto); font-weight: 500; font-size: 15.5px; white-space: nowrap; font-variant-numeric: tabular-nums; color: var(--tinta); }
+.detalle { font-size: 13px; color: var(--tinta-suave); display: flex; flex-wrap: wrap; gap: 2px 12px; }
+.detalle .nota { color: var(--terracota); }
+
+footer { text-align: center; display: flex; flex-direction: column; gap: 8px; padding-top: 8px; border-top: 1px solid var(--linea); }
+footer p { margin: 0; font-size: 12.5px; color: var(--tinta-suave); }
+footer .firma { font-family: var(--display); font-style: italic; font-size: 19px; color: var(--ocre); }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+</style>
+
+<main class="carta">
+  <header>
+    <p class="sub">Interiorismo</p>
+    <h1 class="marca">Ocres</h1>
+    <div class="evento">
+      <strong>Estilo Pilar 2026</strong>
+      <span>SLS Pilar Residences · 30 de octubre al 29 de noviembre</span>
+    </div>
+  </header>
+
+  <nav class="indice" id="indice" aria-label="Categorías"></nav>
+
+  <div id="carta" style="display:flex;flex-direction:column;gap:36px"></div>
+
+  <footer>
+    <p class="firma">Todo lo que ves en el espacio está a la venta.</p>
+    <p>Precios en pesos argentinos, sujetos a cambio. Consultanos en el stand por otros colores, medidas y plazos de entrega.</p>
+  </footer>
+</main>
+
+<script>
+// Datos de la hoja «MENU EP» (planilla OCRES_propuesta_codificacion). Solo filas con «Mostrar en menú» tildado.
+const ITEMS = /*DATA*/[{"cat": "Iluminación", "nombre": "Lámpara Alabaster Mist", "medidas": "Ø 24 cm · alto 24 cm", "precio": "$130.000", "nota": ""}, {"cat": "Iluminación", "nombre": "Lámpara Baby Mushroom · níquel", "medidas": "Ø 9,5 cm · alto 14 cm", "precio": "$30.200", "nota": ""}, {"cat": "Iluminación", "nombre": "Lámpara Chrome Mushroom · níquel", "medidas": "Ø 16 cm · alto 23 cm", "precio": "$70.000", "nota": ""}, {"cat": "Iluminación", "nombre": "Colgante Flowerpot · greige", "medidas": "Ø 38 cm · alto 28 cm", "precio": "$170.000", "nota": ""}, {"cat": "Iluminación", "nombre": "Lámpara Fungi · animal print", "medidas": "Ø 18 cm · alto 23 cm", "precio": "$75.000", "nota": ""}, {"cat": "Iluminación", "nombre": "Lámpara Glimmering · malbec", "medidas": "Ø 10 cm · alto 21 cm", "precio": "$50.000", "nota": ""}, {"cat": "Iluminación", "nombre": "Lámpara Glimmering · verde oscuro", "medidas": "Ø 10 cm · alto 21 cm", "precio": "$50.000", "nota": ""}, {"cat": "Iluminación", "nombre": "Lámpara Glass Up · ámbar", "medidas": "Ø 19 cm · alto 31 cm", "precio": "$100.000", "nota": ""}, {"cat": "Iluminación", "nombre": "Lámpara Piluso Outdoor", "medidas": "", "precio": "$80.000", "nota": ""}, {"cat": "Iluminación", "nombre": "Lámpara Shiny Flowerpot · greige", "medidas": "Ø 10 cm · alto 31 cm", "precio": "$63.000", "nota": ""}, {"cat": "Iluminación", "nombre": "Lámpara Shiny Flowerpot · malbec", "medidas": "Ø 10 cm · alto 31 cm", "precio": "$63.000", "nota": ""}, {"cat": "Iluminación", "nombre": "Lámpara Shiny Flowerpot · níquel", "medidas": "Ø 10 cm · alto 31 cm", "precio": "$74.700", "nota": ""}, {"cat": "Iluminación", "nombre": "Lámpara Shiny Flowerpot · verde oscuro", "medidas": "Ø 10 cm · alto 31 cm", "precio": "$63.000", "nota": ""}, {"cat": "Iluminación", "nombre": "Lámpara Mini Tresa · greige", "medidas": "Ø 10 cm · alto 25 cm", "precio": "$50.000", "nota": ""}, {"cat": "Iluminación", "nombre": "Lámpara Mini Tresa · malbec", "medidas": "Ø 10 cm · alto 25 cm", "precio": "$50.000", "nota": ""}, {"cat": "Iluminación", "nombre": "Colgante Mandarina · Grande · yute sintético habano · Ø 60 cm", "medidas": "Ø 60 cm · alto 40 cm", "precio": "$135.000", "nota": ""}, {"cat": "Iluminación", "nombre": "Colgante Donatsu · Ø 60 cm", "medidas": "Ø 60 cm · alto 58 cm", "precio": "$322.200", "nota": ""}, {"cat": "Mobiliario", "nombre": "Cama Río · petiribí", "medidas": "86 × 166 × 41 cm", "precio": "$2.250.000", "nota": ""}, {"cat": "Mobiliario", "nombre": "Banquito Muelita · álamo natural", "medidas": "30 × 30 × 45 cm", "precio": "$128.000", "nota": ""}, {"cat": "Mobiliario", "nombre": "Estantería · petiribí · 120 × 40 cm", "medidas": "120 × 40 × 230 cm", "precio": "$1.530.000", "nota": ""}, {"cat": "Mobiliario", "nombre": "Mesa Cónica · petiribí · Ø 120 cm", "medidas": "Ø 120 cm · alto 78 cm", "precio": "$1.888.000", "nota": ""}, {"cat": "Mobiliario", "nombre": "Silla Moller · petiribí · asiento tapizado", "medidas": "48 × 45 × 78 cm", "precio": "$275.000", "nota": "Precio por unidad. Se exhiben 4."}, {"cat": "Mobiliario", "nombre": "Rack TV Trento · petiribí · 200 × 40 cm", "medidas": "200 × 40 × 60 cm", "precio": "$905.000", "nota": ""}, {"cat": "Mobiliario", "nombre": "Sillón Recto Brazo Adentro · 2,00–2,10 m · sin funda", "medidas": "200 × 95 cm", "precio": "$1.118.000", "nota": ""}, {"cat": "Mobiliario", "nombre": "Sillón Parma", "medidas": "80 × 70 cm", "precio": "$508.000", "nota": ""}, {"cat": "Mobiliario", "nombre": "Cómoda 6 Cajones · petiribí · 120 × 40 cm", "medidas": "120 × 40 × 90 cm", "precio": "$773.000", "nota": ""}, {"cat": "Fragancias", "nombre": "Fragancia Ocres · Savia · 250 ml", "medidas": "250 ml", "precio": "$12.000", "nota": ""}, {"cat": "Fragancias", "nombre": "Fragancia Ocres · Oriente · 250 ml", "medidas": "250 ml", "precio": "$12.000", "nota": ""}, {"cat": "Fragancias", "nombre": "Fragancia Ocres · Edén · 250 ml", "medidas": "250 ml", "precio": "$12.000", "nota": ""}, {"cat": "Fragancias", "nombre": "Fragancia Ocres · Alba · 250 ml", "medidas": "250 ml", "precio": "$12.000", "nota": ""}, {"cat": "Ropa de cama", "nombre": "Cubre Edredón Lino Manso · white · 220 × 240", "medidas": "220 × 240 cm", "precio": "$581.000", "nota": "100% fibra de lino"}, {"cat": "Ropa de cama", "nombre": "Cubre Edredón Lino Manso · khaki · 220 × 240", "medidas": "220 × 240 cm", "precio": "$581.000", "nota": "100% fibra de lino"}, {"cat": "Ropa de cama", "nombre": "Cubre Edredón Lino Manso · army green · 220 × 240", "medidas": "220 × 240 cm", "precio": "$581.000", "nota": "100% fibra de lino"}, {"cat": "Ropa de cama", "nombre": "Cubre Edredón Lino Manso · white · 260 × 240", "medidas": "260 × 240 cm", "precio": "$635.000", "nota": "100% fibra de lino"}, {"cat": "Ropa de cama", "nombre": "Cubre Edredón Lino Manso · khaki · 260 × 240", "medidas": "260 × 240 cm", "precio": "$635.000", "nota": "100% fibra de lino"}, {"cat": "Ropa de cama", "nombre": "Cubre Edredón Lino Manso · army green · 260 × 240", "medidas": "260 × 240 cm", "precio": "$635.000", "nota": "100% fibra de lino"}, {"cat": "Ropa de cama", "nombre": "Cubre Edredón Lino Manso · white · 280 × 250", "medidas": "280 × 250 cm", "precio": "$660.000", "nota": "100% fibra de lino"}, {"cat": "Ropa de cama", "nombre": "Cubre Edredón Lino Manso · khaki · 280 × 250", "medidas": "280 × 250 cm", "precio": "$660.000", "nota": "100% fibra de lino"}, {"cat": "Ropa de cama", "nombre": "Cubre Edredón Lino Manso · army green · 280 × 250", "medidas": "280 × 250 cm", "precio": "$660.000", "nota": "100% fibra de lino"}, {"cat": "Ropa de cama", "nombre": "Cubre Edredón Lino Percal · off white · 220 × 240", "medidas": "220 × 240 cm", "precio": "$502.000", "nota": ""}, {"cat": "Ropa de cama", "nombre": "Cubre Edredón Lino Percal · white gold · 220 × 240", "medidas": "220 × 240 cm", "precio": "$502.000", "nota": ""}, {"cat": "Ropa de cama", "nombre": "Cubre Edredón Lino Percal · dark stone · 220 × 240", "medidas": "220 × 240 cm", "precio": "$502.000", "nota": ""}, {"cat": "Ropa de cama", "nombre": "Cubre Edredón Lino Percal · off white · 260 × 240", "medidas": "260 × 240 cm", "precio": "$553.000", "nota": ""}, {"cat": "Ropa de cama", "nombre": "Cubre Edredón Lino Percal · white gold · 260 × 240", "medidas": "260 × 240 cm", "precio": "$553.000", "nota": ""}, {"cat": "Ropa de cama", "nombre": "Cubre Edredón Lino Percal · dark stone · 260 × 240", "medidas": "260 × 240 cm", "precio": "$553.000", "nota": ""}, {"cat": "Ropa de cama", "nombre": "Cubre Edredón Lino Percal · off white · 280 × 250", "medidas": "280 × 250 cm", "precio": "$567.000", "nota": ""}, {"cat": "Ropa de cama", "nombre": "Cubre Edredón Lino Percal · white gold · 280 × 250", "medidas": "280 × 250 cm", "precio": "$567.000", "nota": ""}, {"cat": "Ropa de cama", "nombre": "Cubre Edredón Lino Percal · dark stone · 280 × 250", "medidas": "280 × 250 cm", "precio": "$567.000", "nota": ""}, {"cat": "Ropa de cama", "nombre": "Cubre Edredón Tusor · off white · 160 × 240", "medidas": "160 × 240 cm", "precio": "$230.000", "nota": ""}, {"cat": "Ropa de cama", "nombre": "Cubre Edredón Tusor · rosa viejo · 160 × 240", "medidas": "160 × 240 cm", "precio": "$230.000", "nota": ""}, {"cat": "Ropa de cama", "nombre": "Cubre Edredón Tusor · brick · 160 × 240", "medidas": "160 × 240 cm", "precio": "$230.000", "nota": ""}, {"cat": "Ropa de cama", "nombre": "Cubre Edredón Tusor · verde seco · 160 × 240", "medidas": "160 × 240 cm", "precio": "$230.000", "nota": ""}, {"cat": "Ropa de cama", "nombre": "Cubre Edredón Tusor · off white · 220 × 240", "medidas": "220 × 240 cm", "precio": "$249.000", "nota": ""}, {"cat": "Ropa de cama", "nombre": "Cubre Edredón Tusor · rosa viejo · 220 × 240", "medidas": "220 × 240 cm", "precio": "$249.000", "nota": ""}, {"cat": "Ropa de cama", "nombre": "Cubre Edredón Tusor · brick · 220 × 240", "medidas": "220 × 240 cm", "precio": "$249.000", "nota": ""}, {"cat": "Ropa de cama", "nombre": "Cubre Edredón Tusor · verde seco · 220 × 240", "medidas": "220 × 240 cm", "precio": "$249.000", "nota": ""}, {"cat": "Ropa de cama", "nombre": "Cubre Edredón Tusor · off white · 260 × 240", "medidas": "260 × 240 cm", "precio": "$261.000", "nota": ""}, {"cat": "Ropa de cama", "nombre": "Cubre Edredón Tusor · rosa viejo · 260 × 240", "medidas": "260 × 240 cm", "precio": "$261.000", "nota": ""}, {"cat": "Ropa de cama", "nombre": "Cubre Edredón Tusor · brick · 260 × 240", "medidas": "260 × 240 cm", "precio": "$261.000", "nota": ""}, {"cat": "Ropa de cama", "nombre": "Cubre Edredón Tusor · verde seco · 260 × 240", "medidas": "260 × 240 cm", "precio": "$261.000", "nota": ""}, {"cat": "Ropa de cama", "nombre": "Cubre Edredón Tusor · off white · 280 × 250", "medidas": "280 × 250 cm", "precio": "$285.000", "nota": ""}, {"cat": "Ropa de cama", "nombre": "Cubre Edredón Tusor · rosa viejo · 280 × 250", "medidas": "280 × 250 cm", "precio": "$285.000", "nota": ""}, {"cat": "Ropa de cama", "nombre": "Cubre Edredón Tusor · brick · 280 × 250", "medidas": "280 × 250 cm", "precio": "$285.000", "nota": ""}, {"cat": "Ropa de cama", "nombre": "Cubre Edredón Tusor · verde seco · 280 × 250", "medidas": "280 × 250 cm", "precio": "$285.000", "nota": ""}, {"cat": "Ropa de cama", "nombre": "Cubre Edredón Rayado · habano · 220 × 240", "medidas": "220 × 240 cm", "precio": "$295.000", "nota": "100% algodón"}, {"cat": "Ropa de cama", "nombre": "Cubre Edredón Rayado · habano · 260 × 240", "medidas": "260 × 240 cm", "precio": "$310.000", "nota": "100% algodón"}, {"cat": "Ropa de cama", "nombre": "Cubre Edredón Rayado · habano · 280 × 250", "medidas": "280 × 250 cm", "precio": "$339.000", "nota": "100% algodón"}, {"cat": "Ropa de cama", "nombre": "Edredón 4 Estaciones · verano · 160 × 240", "medidas": "160 × 240 cm", "precio": "$175.000", "nota": ""}, {"cat": "Ropa de cama", "nombre": "Edredón 4 Estaciones · verano · 220 × 240", "medidas": "220 × 240 cm", "precio": "$212.000", "nota": ""}, {"cat": "Ropa de cama", "nombre": "Edredón 4 Estaciones · verano · 260 × 240", "medidas": "260 × 240 cm", "precio": "$238.000", "nota": ""}, {"cat": "Ropa de cama", "nombre": "Edredón 4 Estaciones · verano · 280 × 250", "medidas": "280 × 250 cm", "precio": "$277.000", "nota": ""}, {"cat": "Ropa de cama", "nombre": "Sábanas de Bambú 500 hilos · con vainilla · 220 × 240", "medidas": "220 × 240 cm", "precio": "$253.000", "nota": ""}, {"cat": "Ropa de cama", "nombre": "Sábanas de Bambú 500 hilos · con vainilla · 260 × 240", "medidas": "260 × 240 cm", "precio": "$278.000", "nota": ""}, {"cat": "Ropa de cama", "nombre": "Sábanas de Bambú 500 hilos · con vainilla · 280 × 250", "medidas": "280 × 250 cm", "precio": "$295.000", "nota": ""}, {"cat": "Ropa de cama", "nombre": "Sábanas de Bambú 500 hilos · simple · 220 × 240", "medidas": "220 × 240 cm", "precio": "$253.000", "nota": ""}, {"cat": "Ropa de cama", "nombre": "Sábanas de Bambú 500 hilos · simple · 260 × 240", "medidas": "260 × 240 cm", "precio": "$278.000", "nota": ""}, {"cat": "Ropa de cama", "nombre": "Sábanas de Bambú 500 hilos · simple · 280 × 250", "medidas": "280 × 250 cm", "precio": "$295.000", "nota": ""}, {"cat": "Cerámica", "nombre": "Ensaladera Ondulada", "medidas": "", "precio": "$50.800", "nota": ""}, {"cat": "Cerámica", "nombre": "Caballo", "medidas": "", "precio": "$55.600", "nota": ""}, {"cat": "Cerámica", "nombre": "Set de Donuts Negro", "medidas": "", "precio": "$63.500", "nota": ""}, {"cat": "Cerámica", "nombre": "Reloj de Escritorio", "medidas": "", "precio": "$50.800", "nota": ""}, {"cat": "Cerámica", "nombre": "Set de Ovejas · cristal", "medidas": "", "precio": "$55.600", "nota": ""}, {"cat": "Cerámica", "nombre": "Set de Ovejas · jaspeado", "medidas": "", "precio": "$55.600", "nota": ""}, {"cat": "Cerámica", "nombre": "Hornito de Esencia", "medidas": "", "precio": "$23.900", "nota": ""}, {"cat": "Cerámica", "nombre": "Set de Posavasos", "medidas": "", "precio": "$60.400", "nota": ""}, {"cat": "Cerámica", "nombre": "Lechuza", "medidas": "", "precio": "$31.800", "nota": ""}, {"cat": "Cerámica", "nombre": "Panal Calado Jaspeado Gris", "medidas": "", "precio": "$79.400", "nota": ""}, {"cat": "Cerámica", "nombre": "Centro de Mesa Grande", "medidas": "", "precio": "$88.900", "nota": ""}, {"cat": "Cerámica", "nombre": "Fuente con Asas Jaspeado Gris", "medidas": "", "precio": "$71.500", "nota": ""}, {"cat": "Cerámica", "nombre": "Jarra Lunares", "medidas": "", "precio": "$76.200", "nota": ""}, {"cat": "Cerámica", "nombre": "Maceta · rayada", "medidas": "", "precio": "$76.200", "nota": ""}, {"cat": "Cerámica", "nombre": "Maceta · volados", "medidas": "", "precio": "$76.200", "nota": ""}, {"cat": "Iluminación", "nombre": "Lámpara Palmera", "medidas": "", "precio": "$190.500", "nota": ""}];
+
+const ORDEN = ["Iluminación", "Mobiliario", "Ropa de cama", "Cerámica", "Textiles", "Decoración", "Fragancias"];
+const slug = s => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-");
+
+function partir(nombre) {
+  // "Lámpara Glimmering · malbec" -> familia + variante; se quitan los tramos que repiten medidas ("Ø 60 cm", "120 × 40 cm").
+  const partes = nombre.split(" · ").filter(p => !/\bcm\b|\bml\b|^\d+([.,]\d+)?\s*×\s*\d+/.test(p));
+  return { familia: partes[0] || nombre, variante: partes.slice(1).join(" · ") };
+}
+
+function el(tag, cls, txt) { const e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; }
+
+// En estas categorías se junta en una sola fila cada artículo + medida con el mismo precio; los colores van debajo.
+const AGRUPAR = ["Ropa de cama", "Fragancias", "Cerámica"];
+function agrupar(lista) {
+  const out = [], idx = {};
+  lista.forEach(it => {
+    if (!AGRUPAR.includes(it.cat)) { out.push(it); return; }
+    const { familia, variante } = partir(it.nombre);
+    const k = [familia, it.medidas, it.precio, it.nota].join("|");
+    if (idx[k] == null) { idx[k] = out.length; out.push({ ...it, familia, medidaTitulo: it.medidas, opciones: [] }); }
+    if (variante && !out[idx[k]].opciones.includes(variante)) out[idx[k]].opciones.push(variante);
+  });
+  return out;
+}
+
+// En Iluminación, los colores de una misma lámpara con el mismo precio van en un solo renglón; un color con otro precio va aparte.
+const UNIR_COLORES = ["Iluminación"];
+const num = p => Number(String(p).replace(/\D/g, "")) || 0;
+function unirColores(lista) {
+  const out = [], idx = {};
+  lista.forEach(it => {
+    if (!UNIR_COLORES.includes(it.cat)) { out.push(it); return; }
+    const { familia, variante } = partir(it.nombre);
+    const k = [it.cat, familia, it.medidas, it.nota, num(it.precio)].join("|");
+    if (idx[k] == null) { idx[k] = out.length; out.push({ base: it, familia, items: [] }); }
+    out[idx[k]].items.push({ variante, precio: it.precio });
+  });
+  return out.map(g => {
+    if (!g.items) return g;
+    if (g.items.length === 1) return g.base;
+    const min = g.items.reduce((m, x) => num(x.precio) < num(m.precio) ? x : m);
+    const todosIgual = g.items.every(x => num(x.precio) === num(min.precio));
+    return { ...g.base, nombre: g.familia, mix: true, familia: g.familia,
+      precio: todosIgual ? min.precio : "desde " + min.precio,
+      colores: g.items.map(x => x.variante + (num(x.precio) === num(min.precio) ? "" : " (" + x.precio + ")")) };
+  });
+}
+
+const grupos = {};
+// Dentro de cada categoría: orden alfabético, con los colgantes juntos al principio.
+const esColgante = it => /colgante/i.test(it.nombre) ? 0 : 1;
+unirColores(agrupar(ITEMS)).sort((a, b) => (esColgante(a) - esColgante(b)) || a.nombre.localeCompare(b.nombre, "es", { numeric: true, sensitivity: "base" })).forEach(it => { (grupos[it.cat] = grupos[it.cat] || []).push(it); });
+const cats = Object.keys(grupos).sort((a, b) => a.localeCompare(b, "es", { sensitivity: "base" }));
+
+const indice = document.getElementById("indice");
+const carta = document.getElementById("carta");
+cats.forEach(cat => {
+  const a = el("a", null, cat); a.href = "#" + slug(cat); indice.appendChild(a);
+  const sec = el("section"); sec.id = slug(cat);
+  sec.appendChild(el("h2", null, cat));
+  grupos[cat].forEach(it => {
+    let { familia, variante } = it.mix ? { familia: it.familia, variante: "" } : it.familia ? { familia: it.familia, variante: it.medidaTitulo } : partir(it.nombre);
+    const item = el("div", "item");
+    const fila = el("div", "fila");
+    const n = el("span", "nombre", familia);
+    if (variante) { n.appendChild(document.createTextNode(" ")); n.appendChild(el("span", "variante", variante)); }
+    fila.append(n, el("span", "puntos"), el("span", "precio", it.precio));
+    item.appendChild(fila);
+    if (it.mix) {
+      const d = el("div", "detalle");
+      if (it.medidas) d.appendChild(el("span", null, it.medidas));
+      d.appendChild(el("span", null, "Colores: " + it.colores.join(", ")));
+      if (it.nota) d.appendChild(el("span", "nota", it.nota));
+      item.appendChild(d);
+    } else if (it.opciones) {
+      if (it.opciones.length) {
+        const d = el("div", "detalle");
+        d.appendChild(el("span", null, (it.cat === "Fragancias" ? "Aromas: " : /cubre/i.test(familia) ? "Colores: " : it.opciones.length > 1 ? "Opciones: " : "Versión: ") + it.opciones.join(", ")));
+        if (it.nota) d.appendChild(el("span", "nota", it.nota));
+        item.appendChild(d);
+      }
+    } else if (it.medidas || it.nota) {
+      const d = el("div", "detalle");
+      if (it.medidas) d.appendChild(el("span", null, it.medidas));
+      if (it.nota) d.appendChild(el("span", "nota", it.nota));
+      item.appendChild(d);
+    }
+    sec.appendChild(item);
+  });
+  carta.appendChild(sec);
+});
+</script>
+
+</body>
+</html>
