@@ -100,6 +100,9 @@ section h2 {
 }
 section h2::after { content: ""; flex: 1; height: 1px; background: var(--linea); }
 .item { padding: 12px 0; border-bottom: 1px dotted var(--linea); display: flex; flex-direction: column; gap: 3px; }
+.item.con-foto { flex-direction: row; align-items: center; gap: 14px; }
+.item.con-foto .cuerpo { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+.foto { width: 64px; height: 64px; flex-shrink: 0; border-radius: 6px; object-fit: cover; background: var(--papel); border: 1px solid var(--linea); }
 .item:last-child { border-bottom: 0; }
 .fila { display: flex; align-items: baseline; gap: 10px; }
 .nombre { font-family: var(--display); font-size: 21px; font-weight: 600; line-height: 1.15; min-width: 0; }
@@ -149,7 +152,22 @@ const ITEMS = /*DATA*/[{"cat": "Iluminación", "nombre": "Lámpara Alabaster Mis
 // Versión feria (link con ?feria): solo estas categorías y sin el recuadro de Estilo Pilar.
 const FERIA = new URLSearchParams(location.search).has("feria");
 const SOLO_FERIA = ["Fragancias", "Mantas Deco", "Iluminación", "Ropa de cama"];
-const LISTA = FERIA ? ITEMS.filter(it => SOLO_FERIA.includes(it.cat)) : ITEMS;
+// En la feria no van los colgantes ni la Lámpara Palmera.
+const SACAR_FERIA = it => /colgante/i.test(it.nombre) || /palmera/i.test(it.nombre);
+const LISTA = FERIA ? ITEMS.filter(it => SOLO_FERIA.includes(it.cat) && !SACAR_FERIA(it)) : ITEMS;
+
+// Fotos de Iluminación (carpeta img/, una por modelo; en líneas con varios colores, la del primero).
+const FOTOS = {
+  "Lámpara Alabaster Mist": "LUZ-ALM-000-ST", "Lámpara Baby Mushroom": "LUZ-BMU-000-NQ", "Lámpara Chrome Mushroom": "LUZ-CMU-000-NQ",
+  "Colgante Flowerpot": "LUZ-FLP-000-GR", "Lámpara Fungi": "LUZ-FUN-000-AP", "Lámpara Glimmering": "LUZ-GLI-000-MB",
+  "Lámpara Glass Up": "LUZ-GUP-000-AM", "Lámpara Piluso Outdoor": "LUZ-PIL-000-ST", "Lámpara Shiny Flowerpot · níquel": "LUZ-SFP-000-NQ",
+  "Lámpara Shiny Flowerpot": "LUZ-SFP-000-GR", "Lámpara Mini Tresa": "LUZ-TRE-000-GR", "Colgante Donatsu": "LUZ-DON-060-ST"
+};
+function fotoDe(it, familia) {
+  if (it.cat !== "Iluminación") return null;
+  const k = FOTOS[it.nombre] || FOTOS[familia];
+  return k ? "img/" + k + ".jpg" : null;
+}
 if (FERIA) { const ev = document.querySelector(".evento"); if (ev) ev.remove(); document.title = "Ocres · Precios"; }
 
 const ORDEN = ["Iluminación", "Mobiliario", "Ropa de cama", "Cerámica", "Textiles", "Decoración", "Fragancias"];
@@ -258,7 +276,15 @@ cats.forEach(cat => {
       if (it.nota) d.appendChild(el("span", "nota", it.nota));
       item.appendChild(d);
     }
-    sec.appendChild(item);
+    const src = fotoDe(it, familia);
+    if (src) {
+      const caja = el("div", "item con-foto");
+      const img = el("img", "foto"); img.src = src; img.alt = familia; img.loading = "lazy";
+      img.onerror = () => img.remove();
+      item.className = "cuerpo";
+      caja.append(img, item);
+      sec.appendChild(caja);
+    } else sec.appendChild(item);
   });
   carta.appendChild(sec);
 });
