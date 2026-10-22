@@ -170,7 +170,7 @@ function fotoDe(it, familia) {
   const k = FOTOS[it.nombre] || FOTOS[familia];
   return k ? "img/" + k + ".jpg" : null;
 }
-if (FERIA) { const ev = document.querySelector(".evento"); if (ev) ev.remove(); document.title = "Ocres · Precios"; }
+if (FERIA) { const ev = document.querySelector(".evento"); if (ev) ev.remove(); const fo = document.querySelector(".formas"); if (fo) fo.remove(); document.title = "Ocres · Precios"; }
 
 const ORDEN = ["Iluminación", "Mobiliario", "Ropa de cama", "Cerámica", "Textiles", "Decoración", "Fragancias"];
 const slug = s => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-");
@@ -191,6 +191,7 @@ function precioBloque(texto) {
   const box = document.createElement("span"); box.className = "precios";
   const t = document.createElement("span"); t.className = "precio";
   const lt = document.createElement("span"); lt.className = "lbl"; lt.textContent = "Lista";
+  if (FERIA) { t.append(document.createTextNode(desde + pesos(n))); box.append(t); return box; } // feria: sin descuento
   t.append(lt, document.createTextNode(desde + pesos(n)));
   const c = document.createElement("span"); c.className = "contado";
   const lc = document.createElement("span"); lc.className = "lbl"; lc.textContent = "Efvo. / transf.";
